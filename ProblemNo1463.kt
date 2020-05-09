@@ -13,23 +13,23 @@ class MakeOne {
     fun countOperation(number: Int): Int {
         val temp = IntArray(3) { Int.MAX_VALUE }
 
-        if (memoCount[number] != 0 || number == 1) { // Go dynamic, or just base case is equivalent to default
-            return memoCount[number]
-        } else when {
-            number in 2..3 -> { // Base case
-                memoCount[number] = 1
-                return 1
+        if (memoCount[number] == 0 && number != 1) { // Check if to go dynamic
+            when {
+                number in 2..3 -> { // Base case
+                    memoCount[number] = 1
+                    return 1
+                }
+                number % 3 == 0 -> { // Recursive step case 1
+                    temp[0] = countOperation(number / 3)
+                }
+                number % 2 == 0 -> { // Recursive step case 2
+                    temp[1] = countOperation(number / 2)
+                }
             }
-            number % 3 == 0 -> { // Recursive step case 1
-                temp[0] = countOperation(number / 3)
-            }
-            number % 2 == 0 -> { // Recursive step case 2
-                temp[1] = countOperation(number / 2)
-            }
-        }
 
-        temp[2] = countOperation(number - 1) // Recursive case 3
-        memoCount[number] = 1 + temp.min()!!
+            temp[2] = countOperation(number - 1) // Recursive case 3
+            memoCount[number] = 1 + temp.min()!!
+        }
 
         return memoCount[number]
     }

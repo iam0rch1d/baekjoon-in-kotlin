@@ -10,37 +10,37 @@ const val MODULUS = 1000000000
 
 
 class StaircaseNumber {
-    var memoCount = Array(101) { IntArray(11) }
+    var memoCount = Array(101) { IntArray(10) }
     private var count: Int = 0
 
     private fun countAt(digitNo: Int, number: Int): Int {
-        if (memoCount[digitNo][number] != 0 || (digitNo == 1 && number == 0)) {
-            return memoCount[digitNo][number]
-        } else when {
-            digitNo == 1 -> {
-                memoCount[digitNo][number] = 1
-                return 1
-            }
-            number == 0 -> {
-                memoCount[digitNo][number] = countAt(
-                    digitNo - 1,
-                    number + 1
-                ) % MODULUS
-            }
-            number in 1..8 -> {
-                memoCount[digitNo][number] = (countAt(
-                    digitNo - 1,
-                    number - 1
-                ) + countAt(
-                    digitNo - 1,
-                    number + 1
-                )) % MODULUS
-            }
-            number == 9 -> {
-                memoCount[digitNo][number] = countAt(
-                    digitNo - 1,
-                    number - 1
-                ) % MODULUS
+        if (memoCount[digitNo][number] == 0 && (digitNo != 1 || number != 0)) { // Check if to go dynamic
+            when {
+                digitNo == 1 -> {
+                    memoCount[digitNo][number] = 1
+                    return 1
+                }
+                number == 0 -> {
+                    memoCount[digitNo][number] = countAt(
+                        digitNo - 1,
+                        number + 1
+                    ) % MODULUS
+                }
+                number in 1..8 -> {
+                    memoCount[digitNo][number] = (countAt(
+                        digitNo - 1,
+                        number - 1
+                    ) + countAt(
+                        digitNo - 1,
+                        number + 1
+                    )) % MODULUS
+                }
+                number == 9 -> {
+                    memoCount[digitNo][number] = countAt(
+                        digitNo - 1,
+                        number - 1
+                    ) % MODULUS
+                }
             }
         }
 
