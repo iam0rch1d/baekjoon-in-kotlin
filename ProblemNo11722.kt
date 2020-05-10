@@ -1,7 +1,7 @@
 /**
- * ProblemNo11053.kt
- * Longest Increasing Subsequence
- * https://www.acmicpc.net/problem/11053
+ * ProblemNo11722.kt
+ * Longest Decreasing Subsequence
+ * https://www.acmicpc.net/problem/11722
  */
 
 import java.util.Scanner
@@ -11,11 +11,11 @@ fun main() = with(Scanner(System.`in`)) {
     val sequence = IntArray(size + 1)
     val subsequence = Subsequence(sequence)
 
-    sequence[0] = 0
+    sequence[0] = Int.MAX_VALUE
 
     for (i in 1..size) {
         sequence[i] = nextInt()
     }
 
-    println(subsequence.getMaxIncreaseLength())
+    println(subsequence.getMaxDecreaseLength())
 }
