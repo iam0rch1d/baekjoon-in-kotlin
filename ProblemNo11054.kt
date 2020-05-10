@@ -1,21 +1,22 @@
 /**
- * ProblemNo11722.kt
- * Longest Decreasing Subsequence
- * https://www.acmicpc.net/problem/11722
+ * ProblemNo11054.kt
+ * Longest Bitonic Subsequence
+ * https://www.acmicpc.net/problem/11053
  */
 
 import java.util.Scanner
 
 fun main() = with(Scanner(System.`in`)) {
     val size = nextInt()
-    val sequence = IntArray(size + 1)
+    val sequence = IntArray(size + 2)
     val subsequence = Subsequence(sequence)
 
+    sequence[0] = 0
     sequence[sequence.size - 1] = 0
 
-    for (i in 0 until size) {
+    for (i in 1..size) {
         sequence[i] = nextInt()
     }
 
-    println(subsequence.getMaxDecreaseLength())
+    println(subsequence.getMaxBitonicLength())
 }
