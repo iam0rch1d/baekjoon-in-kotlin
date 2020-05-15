@@ -1,6 +1,6 @@
 /**
  * NAndM.kt
- * Class used in problem No.[15649..15651]
+ * Class used in problem No.[15649..15652]
  * range corresponds to N, maxDepth corresponds to M
  */
 
@@ -79,11 +79,31 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
         }
     }
 
+    private fun dfsRepetitiveCombination(depth: Int, minDepth: Int) {
+        if (depth == maxDepth) {
+            for (element in visitedNumber) {
+                bufferedWriter.write("$element ")
+            }
+
+            bufferedWriter.newLine()
+            bufferedWriter.flush()
+
+            return
+        }
+
+        for (i in minDepth..range) {
+            visitedNumber[depth] = i
+
+            dfsRepetitiveCombination(depth + 1, i)
+        }
+    }
+
     fun solveProblem(problemIndex: Int) {
         when (problemIndex) {
             1 -> dfsPermutation(0)
             2 -> dfsCombination(0, 1)
             3 -> dfsRepetitivePermutation(0)
+            4 -> dfsRepetitiveCombination(0, 1)
         }
     }
 }

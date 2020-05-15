@@ -1,7 +1,7 @@
 /**
- * ProblemNo15651.kt
- * N & M 3
- * https://www.acmicpc.net/problem/15651
+ * ProblemNo15652.kt
+ * N & M 4
+ * https://www.acmicpc.net/problem/15652
  */
 
 import java.util.*
@@ -11,5 +11,5 @@ fun main() = with(Scanner(System.`in`)) {
     val maxDepth = nextInt() // M
     val nm = NAndM(range, maxDepth)
 
-    nm.solveProblem(3)
+    nm.solveProblem(4)
 }
