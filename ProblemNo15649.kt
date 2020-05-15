@@ -11,5 +11,5 @@ fun main() = with(Scanner(System.`in`)) {
     val maxDepth = nextInt() // M
     val nm = NAndM(range, maxDepth)
 
-    nm.takeOne()
+    nm.solveProblem(1)
 }
