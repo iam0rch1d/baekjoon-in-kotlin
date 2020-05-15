@@ -57,7 +57,7 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
     fun solveProblem(problemIndex: Int) {
         when (problemIndex) {
             1 -> dfsPermutation(0)
-            2 -> dfsCombination(0, 0)
+            2 -> dfsCombination(0, 1)
         }
     }
 }
