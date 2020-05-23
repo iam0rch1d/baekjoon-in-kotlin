@@ -14,7 +14,7 @@ fun main() = with(Scanner(System.`in`)) {
             print("*")
         }
 
-        println("")
+        println()
     }
 
     for (i in (size - 1) downTo 1) {
@@ -22,6 +22,6 @@ fun main() = with(Scanner(System.`in`)) {
             print("*")
         }
 
-        println("")
+        println()
     }
 }

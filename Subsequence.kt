@@ -55,7 +55,7 @@ class Subsequence(private val sequence: IntArray) {
             print("${memoMaxIncreaseElement[i]} ")
         }
 
-        println("")
+        println()
     }
 
     private fun memoizeMaxIncreaseElement(index: Int) {

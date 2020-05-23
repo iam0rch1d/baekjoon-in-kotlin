@@ -14,13 +14,13 @@ fun main() = with(Scanner(System.`in`)) {
             print("* ")
         }
 
-        println("")
+        println()
         print(" ")
 
         for (j in 1..(size / 2)) {
             print("* ")
         }
 
-        println("")
+        println()
     }
 }

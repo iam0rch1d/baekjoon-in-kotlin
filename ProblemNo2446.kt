@@ -15,7 +15,7 @@ fun printStarLine(size: Int, i: Int) {
         print("*")
     }
 
-    println("")
+    println()
 }
 
 fun main() = with(Scanner(System.`in`)) {
