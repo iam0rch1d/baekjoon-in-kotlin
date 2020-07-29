@@ -4,7 +4,7 @@
  * https://www.acmicpc.net/problem/[Problem Number]
  */
 
-import java.util.Scanner
+import java.util.*
 
 fun main() = with(Scanner(System.`in`)) {
 }

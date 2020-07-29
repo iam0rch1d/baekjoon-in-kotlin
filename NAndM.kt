@@ -1,10 +1,11 @@
 /**
  * NAndM.kt
  * Class used in problem No.[15649..15652]
- * range corresponds to N, maxDepth corresponds to M
+ * Range corresponds to N, maxDepth corresponds to M
  */
 
-import java.io.*
+import java.io.BufferedWriter
+import java.io.OutputStreamWriter
 import java.lang.System.out
 
 class NAndM(private val range: Int, private val maxDepth: Int) {
@@ -12,7 +13,7 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
     private var visitedNumber = IntArray(maxDepth)
     private val bufferedWriter = BufferedWriter(OutputStreamWriter(out))
 
-    private fun dfsPermutation(depth: Int) {
+    fun printPermutation(depth: Int) {
         if (depth == maxDepth) {
             for (element in visitedNumber) {
                 bufferedWriter.write("$element ")
@@ -29,14 +30,14 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
                 isVisited[i] = true
                 visitedNumber[depth] = i
 
-                dfsPermutation(depth + 1)
+                printPermutation(depth + 1)
 
                 isVisited[i] = false
             }
         }
     }
 
-    private fun dfsCombination(depth: Int, minDepth: Int) {
+    fun printCombination(depth: Int, minDepth: Int) {
         if (depth == maxDepth) {
             for (element in visitedNumber) {
                 bufferedWriter.write("$element ")
@@ -53,14 +54,14 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
                 isVisited[i] = true
                 visitedNumber[depth] = i
 
-                dfsCombination(depth + 1, i + 1)
+                printCombination(depth + 1, i + 1)
 
                 isVisited[i] = false
             }
         }
     }
 
-    private fun dfsRepetitivePermutation(depth: Int) {
+    fun printRepetitivePermutation(depth: Int) {
         if (depth == maxDepth) {
             for (element in visitedNumber) {
                 bufferedWriter.write("$element ")
@@ -75,11 +76,11 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
         for (i in 1..range) {
             visitedNumber[depth] = i
 
-            dfsRepetitivePermutation(depth + 1)
+            printRepetitivePermutation(depth + 1)
         }
     }
 
-    private fun dfsRepetitiveCombination(depth: Int, minDepth: Int) {
+    fun printRepetitiveCombination(depth: Int, minDepth: Int) {
         if (depth == maxDepth) {
             for (element in visitedNumber) {
                 bufferedWriter.write("$element ")
@@ -94,16 +95,7 @@ class NAndM(private val range: Int, private val maxDepth: Int) {
         for (i in minDepth..range) {
             visitedNumber[depth] = i
 
-            dfsRepetitiveCombination(depth + 1, i)
-        }
-    }
-
-    fun solveProblem(problemIndex: Int) {
-        when (problemIndex) {
-            1 -> dfsPermutation(0)
-            2 -> dfsCombination(0, 1)
-            3 -> dfsRepetitivePermutation(0)
-            4 -> dfsRepetitiveCombination(0, 1)
+            printRepetitiveCombination(depth + 1, i)
         }
     }
 }
