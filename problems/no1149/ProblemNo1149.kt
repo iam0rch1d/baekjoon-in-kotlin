@@ -14,7 +14,7 @@ fun main() = with(Scanner(System.`in`)) {
     val numStreet = nextInt()
     val cost = Array(numStreet) { IntArray(3) }
     val minCostPartialSum = Array(numStreet) { IntArray(3) }
-    var minCostTotalSum: Int = MAX_COST_TOTAL_SUM
+    var minCostTotalSum = MAX_COST_TOTAL_SUM
 
     // Scan each cost
     for (i in 0 until numStreet) {

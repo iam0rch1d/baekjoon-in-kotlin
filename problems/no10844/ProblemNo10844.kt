@@ -10,34 +10,36 @@ import java.util.*
 
 const val MODULUS = 1000000000
 
-class StaircaseNumber {
-    var memoCount = Array(101) { IntArray(10) }
-    private var count: Int = 0
+class StaircaseCounter {
+    private var numStaircaseStartingWith = Array(101) { IntArray(10) }
+    private var numStaircase = 0
 
-    private fun countAt(digitNo: Int, number: Int): Int {
-        if (memoCount[digitNo][number] == 0 && (digitNo != 1 || number != 0)) { // Check if to go dynamic
+    private fun calculateNumStaircaseAt(digitNo: Int, number: Int): Int {
+        // Check if to go dynamic
+        if (numStaircaseStartingWith[digitNo][number] == 0 && (digitNo != 1 || number != 0)) {
             when {
                 digitNo == 1 -> {
-                    memoCount[digitNo][number] = 1
+                    numStaircaseStartingWith[digitNo][number] = 1
+
                     return 1
                 }
                 number == 0 -> {
-                    memoCount[digitNo][number] = countAt(
+                    numStaircaseStartingWith[digitNo][number] = calculateNumStaircaseAt(
                         digitNo - 1,
                         number + 1
                     ) % MODULUS
                 }
                 number in 1..8 -> {
-                    memoCount[digitNo][number] = (countAt(
+                    numStaircaseStartingWith[digitNo][number] = (calculateNumStaircaseAt(
                         digitNo - 1,
                         number - 1
-                    ) + countAt(
+                    ) + calculateNumStaircaseAt(
                         digitNo - 1,
                         number + 1
                     )) % MODULUS
                 }
                 number == 9 -> {
-                    memoCount[digitNo][number] = countAt(
+                    numStaircaseStartingWith[digitNo][number] = calculateNumStaircaseAt(
                         digitNo - 1,
                         number - 1
                     ) % MODULUS
@@ -45,21 +47,21 @@ class StaircaseNumber {
             }
         }
 
-        return memoCount[digitNo][number]
+        return numStaircaseStartingWith[digitNo][number]
     }
 
-    fun getCount(length: Int): Int {
+    fun solve(length: Int): Int {
         for (i in 0..9) {
-            count = (count + countAt(length, i)) % MODULUS
+            numStaircase = (numStaircase + calculateNumStaircaseAt(length, i)) % MODULUS
         }
 
-        return count
+        return numStaircase
     }
 }
 
 fun main() = with(Scanner(System.`in`)) {
     val length = nextInt()
-    val staircaseNumber = StaircaseNumber()
+    val staircase = StaircaseCounter()
 
-    println(staircaseNumber.getCount(length))
+    println(staircase.solve(length))
 }

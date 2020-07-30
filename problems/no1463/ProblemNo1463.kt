@@ -9,15 +9,15 @@ package problems.no1463
 import java.util.*
 
 class MakeOne {
-    private var memoCount = IntArray(1000001)
+    private var numOperation = IntArray(1000001)
 
     fun countOperation(number: Int): Int {
         val temp = IntArray(3) { Int.MAX_VALUE }
 
-        if (memoCount[number] == 0 && number != 1) { // Check if to go dynamic
+        if (numOperation[number] == 0 && number != 1) { // Check if to go dynamic
             when {
                 number in 2..3 -> { // Base case
-                    memoCount[number] = 1
+                    numOperation[number] = 1
                     return 1
                 }
                 number % 3 == 0 -> { // Recursive step case 1
@@ -29,10 +29,10 @@ class MakeOne {
             }
 
             temp[2] = countOperation(number - 1) // Recursive case 3
-            memoCount[number] = 1 + temp.min()!!
+            numOperation[number] = 1 + temp.min()!!
         }
 
-        return memoCount[number]
+        return numOperation[number]
     }
 }
 

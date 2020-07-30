@@ -21,5 +21,5 @@ fun main() = with(Scanner(System.`in`)) {
         sequence[i] = nextInt()
     }
 
-    println(subsequence.getMaxBitonicLength())
+    println(subsequence.calculateMaxBitonicLength())
 }

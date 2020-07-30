@@ -20,5 +20,5 @@ fun main() = with(Scanner(System.`in`)) {
         sequence[i] = nextInt()
     }
 
-    println(subsequence.getMaxIncreaseLength())
+    println(subsequence.calculateMaxIncreaseLength())
 }

@@ -9,18 +9,8 @@ package problems.no9663
 import java.util.*
 
 class NQueen(private val size: Int) {
-    var numPlacingCase = 0
+    private var numPlacingCase = 0
     private var promisingQueenColumn = Array(size) { -1 }
-
-    fun solve(): Int {
-        for (i in 0 until size) {
-            promisingQueenColumn[0] = i
-
-            countPlacingCase(0, i)
-        }
-
-        return numPlacingCase
-    }
 
     private fun countPlacingCase(row: Int, startingColumn: Int) {
         if (row == size - 1) {
@@ -52,6 +42,16 @@ class NQueen(private val size: Int) {
 
         return true
     }
+
+    fun solve(): Int {
+        for (i in 0 until size) {
+            promisingQueenColumn[0] = i
+
+            countPlacingCase(0, i)
+        }
+
+        return numPlacingCase
+    }
 }
 
 data class Point(val row: Int, val column: Int)
@@ -60,7 +60,6 @@ fun main() = with(Scanner(System.`in`)) {
     val size = nextInt()
     val nQueen = NQueen(size)
 
-    nQueen.solve()
-    print(nQueen.numPlacingCase)
+    print(nQueen.solve())
     println()
 }

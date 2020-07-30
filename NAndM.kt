@@ -9,9 +9,9 @@ import java.io.OutputStreamWriter
 import java.lang.System.out
 
 class NAndM(private val range: Int, private val maxDepth: Int) {
+    private val bufferedWriter = BufferedWriter(OutputStreamWriter(out))
     private var isVisited = BooleanArray(range + 1)
     private var visitedNumber = IntArray(maxDepth)
-    private val bufferedWriter = BufferedWriter(OutputStreamWriter(out))
 
     fun printPermutation(depth: Int) {
         if (depth == maxDepth) {

@@ -23,5 +23,5 @@ fun main() = with(Scanner(System.`in`)) {
         connectionSequence[connection[i][0]] = connection[i][1]
     }
 
-    println(numWire - subsequence.getMaxIncreaseLength())
+    println(numWire - subsequence.calculateMaxIncreaseLength())
 }

@@ -4,55 +4,55 @@
  */
 
 class Subsequence(private val sequence: IntArray) {
-    private val memoMaxIncreaseLengthIn = IntArray(sequence.size)
-    private val memoMaxDecreaseLengthIn = IntArray(sequence.size)
-    private val memoMaxBitonicLengthIn = IntArray(sequence.size)
-    private val memoIndexLengthIncreasedBy = IntArray(sequence.size)
-    private val memoMaxIncreaseElement = IntArray(sequence.size)
+    private val maxIncreaseLength = IntArray(sequence.size)
+    private val maxDecreaseLength = IntArray(sequence.size)
+    private val maxBitonicLength = IntArray(sequence.size)
+    private val indexIncreasingLength = IntArray(sequence.size)
+    private val maxIncreaseElement = IntArray(sequence.size)
 
-    fun getMaxIncreaseLength(): Int {
+    fun calculateMaxIncreaseLength(): Int {
         for (i in 1 until sequence.size) {
             for (j in 0 until i) {
-                if (sequence[j] < sequence[i] && memoMaxIncreaseLengthIn[i] < memoMaxIncreaseLengthIn[j] + 1) {
-                    memoMaxIncreaseLengthIn[i] = memoMaxIncreaseLengthIn[j] + 1
-                    memoIndexLengthIncreasedBy[i] = j
+                if (sequence[j] < sequence[i] && maxIncreaseLength[i] < maxIncreaseLength[j] + 1) {
+                    maxIncreaseLength[i] = maxIncreaseLength[j] + 1
+                    indexIncreasingLength[i] = j
                 }
             }
         }
 
-        return memoMaxIncreaseLengthIn.max()!!
+        return maxIncreaseLength.max()!!
     }
 
-    fun getMaxDecreaseLength(): Int {
+    fun calculateMaxDecreaseLength(): Int {
         for (i in (sequence.size - 2) downTo 0) {
             for (j in (sequence.size - 1) downTo (i + 1)) {
-                if (sequence[j] < sequence[i] && memoMaxDecreaseLengthIn[i] < memoMaxDecreaseLengthIn[j] + 1) {
-                    memoMaxDecreaseLengthIn[i] = memoMaxDecreaseLengthIn[j] + 1
+                if (sequence[j] < sequence[i] && maxDecreaseLength[i] < maxDecreaseLength[j] + 1) {
+                    maxDecreaseLength[i] = maxDecreaseLength[j] + 1
                 }
             }
         }
 
-        return memoMaxDecreaseLengthIn.max()!!
+        return maxDecreaseLength.max()!!
     }
 
-    fun getMaxBitonicLength(): Int {
-        getMaxIncreaseLength()
-        getMaxDecreaseLength()
+    fun calculateMaxBitonicLength(): Int {
+        calculateMaxIncreaseLength()
+        calculateMaxDecreaseLength()
 
         for (i in 1 until sequence.size) {
-            memoMaxBitonicLengthIn[i] = memoMaxIncreaseLengthIn[i] + memoMaxDecreaseLengthIn[i] - 1
+            maxBitonicLength[i] = maxIncreaseLength[i] + maxDecreaseLength[i] - 1
         }
 
-        return memoMaxBitonicLengthIn.max()!!
+        return maxBitonicLength.max()!!
     }
 
     fun printMaxIncrease() {
-        val maxIncrease = IntArray(getMaxIncreaseLength())
+        val maxIncrease = IntArray(calculateMaxIncreaseLength())
 
-        memoizeMaxIncreaseElement(memoMaxIncreaseLengthIn.indexOf(maxIncrease.size))
+        memoizeMaxIncreaseElement(maxIncreaseLength.indexOf(maxIncrease.size))
 
         for (i in maxIncrease.indices) {
-            print("${memoMaxIncreaseElement[i]} ")
+            print("${maxIncreaseElement[i]} ")
         }
 
         println()
@@ -62,9 +62,9 @@ class Subsequence(private val sequence: IntArray) {
         if (index == 0) {
             return
         } else {
-            memoMaxIncreaseElement[memoMaxIncreaseLengthIn[index] - 1] = sequence[index]
+            maxIncreaseElement[maxIncreaseLength[index] - 1] = sequence[index]
 
-            return memoizeMaxIncreaseElement(memoIndexLengthIncreasedBy[index])
+            return memoizeMaxIncreaseElement(indexIncreasingLength[index])
         }
     }
 }
